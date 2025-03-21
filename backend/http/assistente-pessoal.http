@@ -1,0 +1,7 @@
+POST https://miketheemily45.app.n8n.cloud/webhook-test/assistente-pessoal
+Content-Type: application/json
+
+{
+    "chatId": "123456",
+    "mensagem": "você consegue acessar os bancos de dados do supabase?"
+}
