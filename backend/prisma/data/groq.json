@@ -1,0 +1,246 @@
+{
+    "name": "Agente IA",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "assistente-pessoal",
+          "responseMode": "responseNode",
+          "options": {
+            "ignoreBots": true
+          }
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -40,
+          -180
+        ],
+        "id": "30c06d37-44ae-4cc7-b475-7d62d76351f4",
+        "name": "Webhook",
+        "webhookId": "88472838-d73b-493b-a697-3ece7fca47f1"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.body.mensagem }} \n",
+          "options": {
+            "systemMessage": "You are a heVocê é o assistente pessoal dentro do portfólio do desenvolvedor Carlos Alexandre. Estou aberto para trabalhos e contração por empresas. É possível acessar todos os projetos do portfólio pela tool Projetos e todas as tecnologias que eu tenho experiência pela tool Tecnologias. Caso você não conheça a resposta, pode solicitar o telefone com WhatsApp para que o Carlos entre em contato depois. Perguntas não relacionadas aos assuntos como trabalho, projetos e tecnologias, podem ser educadamente negadas, pode usar humor nessas negativas.\nlpful assistant",
+            "maxIterations": 10
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.7,
+        "position": [
+          200,
+          -180
+        ],
+        "id": "7f599b13-16a4-433a-9e55-aaab01538766",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $json.body.chatId}}\n"
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          340,
+          60
+        ],
+        "id": "6270b4e9-c462-4ebf-a889-a4201de70338",
+        "name": "Window Buffer Memory"
+      },
+      {
+        "parameters": {
+          "respondWith": "allIncomingItems",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          800,
+          -180
+        ],
+        "id": "ce3fec8e-68a8-4971-81a8-74af96e2210c",
+        "name": "Respond to Webhook"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "typeVersion": 1,
+        "position": [
+          140,
+          20
+        ],
+        "id": "adcddc58-904b-4df1-96a4-d97c5a4eb271",
+        "name": "Groq Chat Model",
+        "credentials": {
+          "groqApi": {
+            "id": "M4eTnU937nfwrtIz",
+            "name": "Groq account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2182aacc-dc73-4375-907d-5631da15ee92",
+                "name": "resposta",
+                "value": "={{$json.output}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          560,
+          -180
+        ],
+        "id": "056050e2-93da-448f-961c-e227499b392a",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "tecnologias",
+          "returnAll": true
+        },
+        "type": "n8n-nodes-base.supabaseTool",
+        "typeVersion": 1,
+        "position": [
+          280,
+          -380
+        ],
+        "id": "3c1e6f7a-7ed3-4846-a2e9-a5f0ae47d6a0",
+        "name": "tecnologias",
+        "notesInFlow": false,
+        "credentials": {
+          "supabaseApi": {
+            "id": "xMnelz3dmZpeHOgW",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "projetos",
+          "returnAll": true
+        },
+        "type": "n8n-nodes-base.supabaseTool",
+        "typeVersion": 1,
+        "position": [
+          440,
+          -360
+        ],
+        "id": "b83214b7-9935-420a-b50a-7ab9c39a44d7",
+        "name": "projetos",
+        "credentials": {
+          "supabaseApi": {
+            "id": "xMnelz3dmZpeHOgW",
+            "name": "Supabase account"
+          }
+        }
+      }
+    ],
+    "pinData": {},
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Window Buffer Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Groq Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "tecnologias": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "projetos": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "active": false,
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "versionId": "caa8c5ae-b6e7-442c-8703-76fcbc3eaef2",
+    "meta": {
+      "templateCredsSetupCompleted": true,
+      "instanceId": "59159b1aabd509e68ec1348a0e8ca50377cbb0c4d1545af4790bbfcf3cdf77de"
+    },
+    "id": "ptoD2ZQnFPDUx5m1",
+    "tags": []
+  }

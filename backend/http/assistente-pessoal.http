@@ -3,5 +3,5 @@ Content-Type: application/json
 
 {
     "chatId": "123456",
-    "mensagem": "você consegue acessar os bancos de dados do supabase?"
+    "mensagem": "O Miguel consegue programar em Javascript?"
 }
