@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -85,4 +87,11 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+[data-badges] {
+  @apply flex flex-row flex-wrap justify-center gap-2 p-1;
+}
+[data-badges] > img {
+  @apply m-0;
 }

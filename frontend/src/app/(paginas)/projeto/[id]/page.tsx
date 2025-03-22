@@ -1,6 +1,8 @@
+import Readme from "@/components/projetos/Readme"
 import Cabecalho from "@/components/shared/Cabecalho"
 import CarrosselImagens from "@/components/shared/CarrosselImagens"
 import Container from "@/components/shared/Container"
+import ConteudoMD from "@/components/shared/ConteudoMD"
 import Tecnologias from "@/components/tecnologias/Tecnologias"
 import { obterReadme } from "@/functions/github"
 import { obterProjeto } from "@/functions/projetos"
@@ -19,7 +21,7 @@ export default async function PaginaProjeto(props: { params: Promise<{ id: strin
                 <h1 className="text-3xl font-bold self-start">{projeto.nome}</h1>
                 <CarrosselImagens imagens={projeto.imagens.slice(1)} />
                 <Tecnologias lista={projeto.tecnologias} tamanhoMenor/>
-                <div>{readme}</div>
+                <Readme markdown={readme} />
             </Container>
         </div>
     )
