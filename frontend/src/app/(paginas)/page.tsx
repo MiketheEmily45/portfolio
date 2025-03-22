@@ -1,6 +1,7 @@
 import Curriculo from "@/components/curriculo";
 import Principal from "@/components/landing/principal"
 import Cabecalho from "@/components/shared/Cabecalho"
+import Container from "@/components/shared/Container";
 import { obterTecnologias } from "@/functions/tecnologias";
 
 export default async function Home() {
@@ -8,7 +9,9 @@ export default async function Home() {
   return (
     <div>
       <Principal />
-      <Curriculo tecnologias={tecnologias.todas}/>
+      <Container className="py-16">
+        <Curriculo tecnologias={tecnologias.todas}/>
+      </Container>
     </div>
   );
 }

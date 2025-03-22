@@ -3,7 +3,7 @@ import { httpGet } from "./api"
 
 export async function obterTecnologias() {
     const tecnologias: Tecnologia[] = await httpGet("/tecnologias")
-
+    console.log(tecnologias)
     return {
         todas: tecnologias,
         get destaques() {
