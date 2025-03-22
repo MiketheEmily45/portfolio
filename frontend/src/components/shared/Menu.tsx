@@ -6,7 +6,7 @@ export default function Menu() {
     const caminho = usePathname()
     return (
         <nav className="flex gap-6">
-            <MenuItem href="/" selecionado={true}>Início</MenuItem>
+            <MenuItem href="/" selecionado={caminho === "/"}>Início</MenuItem>
             <MenuItem href="/projeto/1" selecionado={caminho.startsWith("/projeto")}>Projetos</MenuItem>
             <MenuItem href="mailto:miguelprofissionaldev@gmail.com" selecionado={false} novaAba={true}>Contato</MenuItem>
         </nav>)
