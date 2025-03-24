@@ -2,8 +2,6 @@
 
 <div align="center">
 
-<img src="./.gitassets/capa.png" width="350px">
-
 <div data-badges>
     <img src="https://img.shields.io/github/stars/portfolio-projetos-dev/portfoleo?style=for-the-badge" alt="GitHub stars" />
     <img src="https://img.shields.io/github/forks/portfolio-projetos-dev/portfoleo?style=for-the-badge" alt="GitHub forks" />
