@@ -44,9 +44,9 @@ export default function JanelaChat() {
             )}
             <div className="h-px bg-zinc-400 mt-4" />
             <div className="flex items-center gap-2 p-1 m-4 rounded-full h-10 bg-white">
-                <input type="text" value={texto} className="flex-1 bg-transparent h-8 outline-none pl-3" onChange={(e: any) => {
+                <input type="text" value={texto} className="flex-1 bg-transparent h-8 outline-none pl-3" onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setTexto(e.target.value)
-                }} onKeyDown={(e: any) => {
+                }} onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                     if (e.key === "Enter") enviarMensagem()
                     }}/>
                 <button className="flex justify-center items-center min-h-8 min-w-8 rounded-full bg-red-500" onClick={enviarMensagem}>

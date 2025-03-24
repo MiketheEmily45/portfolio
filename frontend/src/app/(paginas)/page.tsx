@@ -1,7 +1,6 @@
 import Curriculo from "@/components/curriculo";
 import Principal from "@/components/landing/principal"
 import Projetos from "@/components/projetos/Projetos";
-import Cabecalho from "@/components/shared/Cabecalho"
 import Container from "@/components/shared/Container";
 import { obterProjetos } from "@/functions/projetos";
 import { obterTecnologias } from "@/functions/tecnologias";

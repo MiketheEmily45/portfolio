@@ -30,9 +30,9 @@ export default function Chat() {
                 </div>
             )}
 
-            <input type="text" value={texto} className="border border-gray-700 rounded p-2" onChange={(e: any) => {
+            <input type="text" value={texto} className="border border-gray-700 rounded p-2" onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setTexto(e.target.value)
-            }} onKeyDown={(e: any) => {
+            }} onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                 if (e.key === "Enter") {
                 adicionarMensagem(texto)
                 setTexto("")

@@ -1,3 +1,4 @@
+"use client"
 import { Id } from "@core";
 import useLocalStorage from "./useLocalStorage";
 import Mensagem from "@/model/Mensagem";
