@@ -5,6 +5,8 @@ import Container from "@/components/shared/Container";
 import { obterProjetos } from "@/functions/projetos";
 import { obterTecnologias } from "@/functions/tecnologias";
 
+export const revalidate = 3600 // de 1 em 1 hora revalida a página
+
 export default async function Home() {
   const tecnologias = await obterTecnologias()
   const projetos = await obterProjetos()
