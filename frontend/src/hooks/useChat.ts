@@ -18,7 +18,6 @@ export default function useChat() {
                 texto,
                 autor: "Visitante",
                 lado: "direito",
-                icone: null
             }
     
             setMensagens((msgs) => [...msgs, novaMensagem])
@@ -32,7 +31,6 @@ export default function useChat() {
                 texto: resposta,
                 autor: "Assistente",
                 lado: "esquerdo",
-                icone: null
             }
 
             setMensagens((msgs) => [...msgs, mensagemResposta])
